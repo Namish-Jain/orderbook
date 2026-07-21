@@ -4,6 +4,7 @@
 #include "Order/PriceLevel.hpp"
 #include "OrderBook/OrderMatchingStrategy.hpp"
 #include <map>
+#include <unordered_map>
 #include <string>
 
 class OrderBook {
@@ -19,7 +20,7 @@ private:
     std::map<Price, PriceLevel, std::greater<Price>> bids_;
     std::map<Price, PriceLevel> asks_;
     OrderMatchingStrategy* strategy = nullptr;
-    std::map<OrderId, OrderEntry> orders_;
+    std::unordered_map<OrderId, OrderEntry> orders_;
 
     void addOrderToBook(OrderId id, const OrderEntry& entry);
     void removeOrderFromBook(OrderId id, const OrderEntry& entry);
