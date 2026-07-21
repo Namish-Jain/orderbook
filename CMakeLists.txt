@@ -15,3 +15,21 @@ add_executable(lobV3
 )
 
 target_include_directories(lobV3 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_executable(benchmark
+    benchmark.cpp
+    src/OrderBook/OrderBook.cpp
+    src/Order/Order.cpp
+    src/Order/LimitOrder.cpp
+    src/Order/PriceLevel.cpp
+    src/OrderBook/PriceTimeOrderMatchingStrategy.cpp
+)
+
+target_include_directories(benchmark PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+# Release-mode optimizations matter a lot for latency numbers.
+# If you don't pass -DCMAKE_BUILD_TYPE=Release on the cmake command,
+# default to a sane optimization level anyway.
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release)
+endif()
